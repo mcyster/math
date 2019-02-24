@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> </title>
+    </head>
+    <body>
+    <div>
+       Pi estimate: <span id="pi">calulating</span>
+     </div>
+     <canvas id="myCanvas" width="700" height="800" style="border:1px solid #d3d3d3;background:#ffffff;">
+      YourbrowserdoesnotsupporttheHTML5canvastag.
+     </canvas>
+    <script>
+
+function PiEstimator(canvas, piElement) {
+    var width = Math.floor(canvasElement.width / 2) * 2;
+    var height = Math.floor(canvasElement.height / 2) * 2;
+      
+    var diameter = height;
+    if (width < height) {
+        diameter = width;
+    }
+    var radius = diameter / 2;
+    
+    console.log("radius:", radius);
+
+    var centerWithMathOrigin = function(canvas) {
+      var width = Math.floor(canvasElement.width / 2) * 2;
+      var height = Math.floor(canvasElement.height / 2) * 2;
+      canvas.transform(1, 0, 0, -1, width / 2, height / 2);
+    };
+    
+    var drawOrigin =  function(canvas) {
+      canvas.beginPath();
+      canvas.moveTo(-10, 0);
+      canvas.lineTo(10, 0);
+      canvas.stroke();
+      
+      canvas.beginPath();
+      canvas.moveTo(0, -10);
+      canvas.lineTo(0, 10);
+      canvas.stroke();
+    };
+
+    var drawCircle = function(canvas) {
+      canvas.beginPath();
+      canvas.arc(0, 0, radius, 0, 2 * Math.PI);
+      canvas.stroke();
+    }
+    
+    var circleCount = 0
+    var squareCount = 0;
+    
+    var estimate = function() {
+        for(var i = 0; i < 1000; i++) {
+            var x = Math.random() * diameter - radius;
+            var y = Math.random() * diameter - radius;
+            canvas.fillRect(x,y,1,1);
+            var h = Math.sqrt(x * x + y * y); 
+            if (h <= radius) {
+                circleCount++
+            }
+            squareCount++
+        }
+    
+        console.log("circleCount:", circleCount);
+        console.log("squareCount:", squareCount);
+        
+        console.log("Pi Estimate:", 4 * circleCount / squareCount);
+        
+        var pi = 4 * circleCount / squareCount;
+        
+        piElement.innerHTML = pi.toFixed(20);
+    }
+    
+    centerWithMathOrigin(canvas)
+    drawOrigin(canvas)
+    drawCircle(canvas)
+    
+    setInterval(estimate, 10);
+    
+}
+
+var canvasElement = document.getElementById("myCanvas");
+var piElement = document.getElementById("pi");
+
+var canvas = canvasElement.getContext("2d");
+
+var estimate = new PiEstimator(canvas, piElement);
+
+    </script>
+    </body>
+</html>
