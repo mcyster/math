@@ -10,6 +10,17 @@
      <canvas id="myCanvas" width="700" height="800" style="border:1px solid #d3d3d3;background:#ffffff;">
       YourbrowserdoesnotsupporttheHTML5canvastag.
      </canvas>
+     <h1>Estimating &pi;</h1>
+      <ul>
+          <li>Area of a circle: a = &pi; * r ^ 2</li>
+          <li>Area of a Square: s = l ^ 2</li>
+          <li>Make circle and Square cocentric on the origin, let l = 2 * r</li>
+          <li>Select a point: (x, y), such that x in [0, r], y in [0, r]</li>
+          <li>Distance to point from orgin: h = sqrt(x ^ 2 + y ^ 2), use this to determine if the point is inside our outside the circle</li>
+          <li>Probabity point is in circle: p = a / s = &pi; * r ^ 2 / l ^ 2 = &pi; * r ^ 2 / (2 * r) ^ 2 = &pi; * r ^ 2 / 4 * r ^ 2 = &pi; / 4</li>
+          <li>&pi; = 4 * p;</li>
+      </ul>
+     
     <script>
 
 function PiEstimator(canvas, piElement) {
